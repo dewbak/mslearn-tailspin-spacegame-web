@@ -5,6 +5,7 @@ FROM ubuntu:18.04 as build-image
 ENV DEBIAN_FRONTEND=noninteractive
 RUN echo "APT::Get::Assume-Yes \"true\";" > /etc/apt/apt.conf.d/90assumeyes
 
+# Running update and install twice since we need wget to install dotnet sdk
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
@@ -21,7 +22,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
   && dpkg -i packages-microsoft-prod.deb \
   && rm packages-microsoft-prod.deb \
-  && apt-get update && apt-get install -y dotnet-sdk-5.0
+  && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+  && apt-get update && apt-get install -y dotnet-sdk-5.0 nodejs
 
 RUN curl -LsS https://aka.ms/InstallAzureCLIDeb | bash \
   && rm -rf /var/lib/apt/lists/*
