@@ -20,7 +20,7 @@ steps:
 
 - task: npm@1
   displayName: 'Run npm install'
-  input:
+  inputs:
     verbose: false
 
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
