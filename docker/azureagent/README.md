@@ -7,7 +7,7 @@ Make sure
 ## Build docker agent image
 Run command in directory containing the dockerfile:
 ```
-docker build -f azureagent:latest .
+docker build -t azureagent:latest .
 ```
 ## Start docker agent and connect to Azure DevOps
 
@@ -18,5 +18,5 @@ Details about what pool it's connected to, the agent name etc. can be found in `
 ### Start the docker agent
 Run command:
 ```
-docker run -it -e AZP_URL=https://dev.azure.com/hellowallin -e AZP_TOKEN=$(cat ~/.azure_conf/admin-token) -e AZP_AGENT_NAME=mydockeragent azureagent:latest
+docker run -e AZP_URL=https://dev.azure.com/hellowallin -e AZP_TOKEN=$(cat ~/.azure_conf/admin-token) -e AZP_AGENT_NAME=mydockeragent azureagent:latest
 ```
